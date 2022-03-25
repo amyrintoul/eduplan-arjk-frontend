@@ -4,9 +4,12 @@ import Home from "./pages/Home.vue"
 import Login from "./pages/Login.vue"
 import Register from "./pages/Register.vue"
 import Dashboard from "./pages/Dashboard.vue"
-import Exams from "./pages/Exams.vue"
+import Exams from "./pages/exams/Exams.vue"
 import Timetable from "./pages/Timetable.vue"
 import UsefulLinks from "./pages/UsefulLinks.vue"
+import Calendar from "./pages/calendar/Calendar.vue"
+import Assignments from "./pages/Assignments.vue"
+
 
 
 Vue.use(Router);
@@ -50,6 +53,17 @@ export default new Router({
             name: "exams",
             component: Exams
         },
+        {
+            path: "/calendar",
+            name: "calendar",
+            component: Calendar
+        },
+        {
+            path: "/assignments",
+            name: "assignments",
+            component: Assignments
+        },
+        
         
 
 

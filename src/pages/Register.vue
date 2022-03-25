@@ -9,13 +9,13 @@
                     alt="Education Logo" contain height="300"></v-img>
                     <v-card-text>
                         <v-form>
-                            <v-text-field label="Name" name="name" prepend-inner-icon="mdi-account"
+                            <v-text-field v-model="form.full_name" label="Name" name="name" prepend-inner-icon="mdi-account"
                             type="text" class="rounded-2" outlined></v-text-field>
-                            <v-text-field label="Enter you email" name="email" prepend-inner-icon="mdi-mail"
+                            <v-text-field v-model="form.email" label="Enter you email" name="email" prepend-inner-icon="mdi-mail"
                             type="email" class="rounded-2" outlined></v-text-field>
-                            <v-text-field label="Enter your password" name="password" prepend-inner-icon="mdi-lock"
+                            <v-text-field v-model="form.password" label="Enter your password" name="password" prepend-inner-icon="mdi-lock"
                             type="password" suffix="| Forgot?" class="rounded-2" outlined></v-text-field>
-                            <v-btn class="rounded-2" color="black" x-large block dark href="/login">Register</v-btn>
+                            <v-btn class="rounded-2" color="black" x-large block dark @click="submitForm()">Register</v-btn>
                             <v-card-actions class="text--secondary">
                                 <v-checkbox color="black" label="Remember me"></v-checkbox>
                                 <v-spacer></v-spacer>
@@ -42,13 +42,41 @@
 </template>
 
 <script>
+import axios from '@/config'
 
 export default {
-  name: 'Login',
+  name: 'Register',
   components: {
     
     
     
+  },
+  data() {
+      return {
+          form: {
+              full_name: '',
+              email: '',
+              password: ''
+          }
+      }
+  },
+  methods: {
+      submitForm() {
+          axios.post('/register', {
+              full_name: this.form.full_name,
+              email: this.form.email,
+              password: this.form.password
+          })
+          .then(response => {
+              console.log(response.data)
+              this.$router.push({
+                    name: 'login'
+                })
+          })
+          .catch(error => {
+              console.log(error)
+          })
+      }
   }
 }
 </script>
